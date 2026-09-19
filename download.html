@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocalLoop™ — Your Downloads</title>
+<style>
+  :root { --bg:#0b0f14; --panel:#121a24; --line:#22303f; --txt:#e9f0f7; --dim:#93a4b8; --accent:#2dd4a7; --good:#34d399; --bad:#f87171; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--txt); font-family:'Segoe UI',system-ui,sans-serif; min-height:100vh; }
+  .wrap { max-width:800px; margin:0 auto; padding:40px 20px 80px; }
+  .logo { font-size:22px; font-weight:700; margin-bottom:6px; }
+  .logo span { color:var(--accent); }
+  .sub { color:var(--dim); font-size:14px; margin-bottom:32px; }
+  .gate { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:28px; margin-bottom:28px; }
+  .gate h2 { font-size:18px; margin-bottom:8px; }
+  .gate p { color:var(--dim); font-size:13px; margin-bottom:18px; }
+  input { width:100%; background:var(--bg); border:1px solid var(--line); color:var(--txt); padding:12px 14px; border-radius:8px; font-size:15px; margin-bottom:12px; }
+  .btn { background:var(--accent); color:#04231a; border:none; padding:12px 20px; border-radius:8px; font-weight:700; font-size:14px; cursor:pointer; width:100%; }
+  .btn:hover { filter:brightness(1.1); }
+  .err { color:var(--bad); font-size:13px; margin-top:10px; min-height:18px; }
+  .locked { display:none; }
+  .files { display:grid; gap:12px; }
+  .file { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+  .file h3 { font-size:15px; margin-bottom:3px; }
+  .file p { color:var(--dim); font-size:12.5px; line-height:1.45; }
+  .file .btn { width:auto; padding:9px 16px; font-size:12.5px; flex-shrink:0; }
+  .badge { display:inline-block; background:rgba(52,211,153,0.12); color:var(--good); font-size:11px; padding:2px 10px; border-radius:12px; font-weight:600; margin-bottom:6px; }
+  footer { margin-top:40px; text-align:center; color:var(--dim); font-size:12px; }
+  .start { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; margin-bottom:16px; }
+  .start h3 { font-size:16px; margin-bottom:8px; }
+  .start ol { padding-left:20px; color:var(--dim); font-size:13.5px; line-height:1.9; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">🔁 Local<span>Loop</span>™</div>
+  <div class="sub">The LocalLoop™ Private AI System — your member downloads</div>
+
+  <div id="gateBox" class="gate">
+    <h2>🔐 Unlock your downloads</h2>
+    <p>Enter the email you purchased with and your personal access code (sent in your order confirmation email).</p>
+    <input id="email" type="email" placeholder="you@email.com" autocomplete="email">
+    <input id="code" type="text" placeholder="LL-XXXXX-XXXXX" autocomplete="off">
+    <button class="btn" onclick="unlock()">Unlock →</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="memberArea" class="locked">
+    <div class="start">
+      <span class="badge">✅ Unlocked</span>
+      <h3>Start here — your 7-day build</h3>
+      <ol>
+        <li><b>READ (10 min):</b> The LocalLoop System — the four-stage model and the 7-day build plan</li>
+        <li><b>HOST (tonight):</b> install a free runtime, run a small model, summarize one real document</li>
+        <li><b>HARNESS (this week):</b> write your 5-file Context Pack and Voice Contract</li>
+        <li><b>LOOP (weekend):</b> build a scheduled digest loop, add a kill switch, log every run</li>
+      </ol>
+    </div>
+    <div class="files">
+      <div class="file">
+        <div><h3>🔁 1. The LocalLoop System</h3><p>The core guide — the 4-stage model, the 7-day build, and the economics of owning vs renting.</p></div>
+        <button class="btn" onclick="dl('01-localloop-system.pdf', this)">Download</button>
+      </div>
+      <div class="file">
+        <div><h3>🖥️ 2. The Hardware Tiers</h3><p>What actually runs on your machine — plain numbers, tiers 0–3, and the honest upgrade answer.</p></div>
+        <button class="btn" onclick="dl('02-hardware-tiers.pdf', this)">Download</button>
+      </div>
+      <div class="file">
+        <div><h3>🎯 3. The Model Picker</h3><p>Choose a model by job, not hype — job→family→size table, quant ladder, 20-minute test protocol.</p></div>
+        <button class="btn" onclick="dl('03-model-picker.pdf', this)">Download</button>
+      </div>
+      <div class="file">
+        <div><h3>📦 4. The Context Pack</h3><p>The 5 files that make a small local model sound like you — plus the anti-slop wordlist.</p></div>
+        <button class="btn" onclick="dl('04-context-pack.pdf', this)">Download</button>
+      </div>
+      <div class="file">
+        <div><h3>📜 5. The Voice Contract</h3><p>The prompt template + anti-slop ruleset, with a worked slop-vs-shippable example.</p></div>
+        <button class="btn" onclick="dl('05-voice-contract.pdf', this)">Download</button>
+      </div>
+      <div class="file">
+        <div><h3>⏰ 6. The Loop Builder</h3><p>Make it run without you — schedules, triggers, and the non-negotiable kill switch.</p></div>
+        <button class="btn" onclick="dl('06-loop-builder.pdf', this)">Download</button>
+      </div>
+      <div class="file">
+        <div><h3>📊 7. The Run Log &amp; Trust Gate</h3><p>Prove it ran, then promote it — run log format, weekly scorecard, the 10-run trust gate.</p></div>
+        <button class="btn" onclick="dl('07-runlog-trustgate.pdf', this)">Download</button>
+      </div>
+      <div class="file">
+        <div><h3>🧰 8. The LocalLoop Playbook</h3><p>Starter scripts, the 30-day roadmap, and three ways to turn the skill into income.</p></div>
+        <button class="btn" onclick="dl('08-localloop-playbook.pdf', this)">Download</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>LocalLoop™ · run a private AI you own · no code required</footer>
+</div>
+
+<script>
+function unlock() {
+  const email = document.getElementById('email').value.trim();
+  const code = document.getElementById('code').value.trim();
+  const err = document.getElementById('err');
+  if (!email || !code) { err.textContent = 'Please enter both email and access code.'; return; }
+  fetch('/api/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, code }) })
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) {
+        sessionStorage.setItem('ll_email', email);
+        sessionStorage.setItem('ll_code', code);
+        document.getElementById('gateBox').style.display = 'none';
+        document.getElementById('memberArea').classList.remove('locked');
+        document.getElementById('memberArea').style.display = 'block';
+        err.textContent = '';
+      } else {
+        err.textContent = d.error || 'Access denied. Check your code and email.';
+      }
+    })
+    .catch(() => { err.textContent = 'Network error — try again.'; });
+}
+
+function dl(file, btn) {
+  const email = sessionStorage.getItem('ll_email');
+  const code = sessionStorage.getItem('ll_code');
+  if (!email || !code) { alert('Session expired — please unlock again.'); location.reload(); return; }
+  const orig = btn.textContent;
+  btn.textContent = '⏳ …';
+  btn.disabled = true;
+  fetch('/api/download', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, code, file }) })
+    .then(async r => {
+      if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || 'Download failed (' + r.status + ')'); }
+      const blob = await r.blob();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = file;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      btn.textContent = '✅ Sent';
+    })
+    .catch(e => { alert(e.message); btn.textContent = orig; })
+    .finally(() => { btn.disabled = false; setTimeout(() => { if (btn.textContent === '✅ Sent') btn.textContent = orig; }, 2500); });
+}
+
+// auto-unlock if already verified this session
+const em = sessionStorage.getItem('ll_email');
+const ec = sessionStorage.getItem('ll_code');
+if (em && ec) {
+  fetch('/api/verify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: em, code: ec }) })
+    .then(r => r.json())
+    .then(d => { if (d.ok) { document.getElementById('gateBox').style.display = 'none'; document.getElementById('memberArea').classList.remove('locked'); document.getElementById('memberArea').style.display = 'block'; } });
+}
+document.getElementById('code').addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
+</script>
+</body>
+</html>

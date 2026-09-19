@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocalLoop™ — Run a Private AI on Your Own Machine</title>
+<meta name="description" content="Replace your AI subscriptions with a private AI that runs on your own laptop. Keep your data home, kill the monthly meter, and ship content that doesn't smell like AI slop.">
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#121a24; --panel2:#0f161f; --line:#22303f;
+    --txt:#e9f0f7; --dim:#93a4b8; --accent:#2dd4a7; --accent2:#3b82f6;
+    --good:#34d399; --bad:#f87171; --warm:#fbbf24;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px;}
+  .narrow{max-width:760px;margin:0 auto;padding:0 22px;}
+  section{padding:64px 0;border-bottom:1px solid rgba(34,48,63,.6);}
+  h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.1;letter-spacing:-.02em;}
+  h2{font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.2;margin-bottom:18px;letter-spacing:-.01em;}
+  h3{font-size:1.15rem;margin-bottom:8px;}
+  p{color:#c9d6e4;margin-bottom:16px;font-size:1.06rem;}
+  .dim{color:var(--dim);}
+  .accent{color:var(--accent);}
+  .accent2{color:var(--accent2);}
+  .kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:rgba(45,212,167,.1);border:1px solid rgba(45,212,167,.25);padding:6px 14px;border-radius:100px;margin-bottom:22px;}
+  /* HERO */
+  .hero{padding:86px 0 70px;background:radial-gradient(900px 420px at 50% -8%,rgba(45,212,167,.10),transparent 70%);}
+  .hero .logo{font-size:1.35rem;font-weight:800;letter-spacing:-.01em;margin-bottom:34px;}
+  .hero .logo span{color:var(--accent);}
+  .part1{font-weight:800;color:var(--txt);display:block;font-size:clamp(1.4rem,3.2vw,1.9rem);margin-bottom:10px;}
+  .part2{display:block;margin-bottom:20px;}
+  .part2 em{font-style:normal;color:var(--accent);}
+  .part3{display:block;font-size:clamp(1.05rem,2.1vw,1.32rem);color:#b9c8d9;font-weight:500;margin-bottom:30px;}
+  .proofline{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:32px;font-size:.95rem;color:var(--dim);}
+  .proofline span::before{content:"✔ ";color:var(--good);font-weight:700;}
+  .cta{display:inline-block;background:linear-gradient(135deg,var(--accent),#12a37f);color:#04231a;font-weight:800;font-size:1.1rem;padding:18px 40px;border-radius:13px;text-decoration:none;box-shadow:0 12px 40px rgba(45,212,167,.28);transition:transform .15s,box-shadow .15s;}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 18px 50px rgba(45,212,167,.4);}
+  .cta-sub{display:block;margin-top:12px;font-size:.9rem;color:var(--dim);}
+  .microreassure{margin-top:16px;font-size:.88rem;color:var(--dim);}
+  /* CARDS */
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;}
+  .card .num{font-size:.8rem;font-weight:800;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+  .card p{font-size:.96rem;color:var(--dim);margin:0;}
+  /* STEPS */
+  .step{display:flex;gap:18px;margin-bottom:26px;align-items:flex-start;}
+  .step .badge{flex-shrink:0;width:44px;height:44px;border-radius:12px;background:rgba(45,212,167,.12);border:1px solid rgba(45,212,167,.3);color:var(--accent);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+  .step p{font-size:.98rem;color:#b9c8d9;margin:0;}
+  /* COMPARE */
+  table{width:100%;border-collapse:collapse;font-size:.95rem;margin-top:8px;}
+  th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);}
+  th{color:var(--dim);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;}
+  td.yes{color:var(--good);} td.no{color:var(--bad);}
+  tr:last-child td{border-bottom:none;}
+  .tablecard{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  /* OFFER */
+  .offer{background:linear-gradient(180deg,rgba(45,212,167,.07),rgba(45,212,167,.02));border:1px solid rgba(45,212,167,.28);border-radius:22px;padding:36px 32px;text-align:center;}
+  .offer h3{font-size:1.5rem;margin-bottom:6px;}
+  .price{margin:22px 0;}
+  .price .old{color:var(--dim);text-decoration:line-through;font-size:1.15rem;margin-right:12px;}
+  .price .new{font-size:3rem;font-weight:900;color:var(--accent);letter-spacing:-.02em;}
+  .price .cur{font-size:1.2rem;color:var(--accent);font-weight:700;vertical-align:super;}
+  .stacklist{list-style:none;text-align:left;max-width:520px;margin:24px auto;}
+  .stacklist li{padding:9px 0 9px 30px;position:relative;color:#c9d6e4;border-bottom:1px dashed rgba(45,212,167,.15);font-size:.98rem;}
+  .stacklist li:last-child{border-bottom:none;}
+  .stacklist li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800;}
+  .stacklist li b{color:var(--txt);}
+  .guarantee{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:26px;text-align:left;font-size:.94rem;color:var(--dim);}
+  .guarantee b{color:var(--good);}
+  /* FAQ */
+  details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:12px;overflow:hidden;}
+  summary{cursor:pointer;padding:18px 22px;font-weight:600;font-size:1.02rem;list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";float:right;color:var(--accent);font-weight:800;font-size:1.3rem;line-height:1;}
+  details[open] summary::after{content:"−";}
+  details p{padding:0 22px 20px;font-size:.96rem;color:var(--dim);margin:0;}
+  /* TESTIMONIAL */
+  .quote{background:var(--panel);border-left:3px solid var(--accent);border-radius:12px;padding:22px 24px;margin-bottom:16px;}
+  .quote p{font-style:italic;color:#d5e0ec;font-size:1rem;margin-bottom:10px;}
+  .quote .who{font-size:.85rem;color:var(--dim);font-style:normal;}
+  /* FINAL */
+  .final{text-align:center;background:radial-gradient(700px 300px at 50% 100%,rgba(45,212,167,.12),transparent 70%);}
+  footer{padding:40px 0;text-align:center;color:var(--dim);font-size:.82rem;line-height:1.9;}
+  footer a{color:var(--dim);}
+  .disclaimer{font-size:.78rem;color:#5d6b7c;max-width:680px;margin:14px auto 0;}
+  @media(max-width:600px){.wrap,.narrow{padding:0 16px;}section{padding:46px 0;}.offer{padding:26px 18px;}.price .new{font-size:2.4rem;}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="logo">Local<span>Loop</span>™</div>
+    <span class="kicker">Private AI · Owned, Not Rented</span>
+    <h1>
+      <span class="part1">Stop Paying Rent On Your Own Brain.</span>
+      <span class="part2">The <em>LocalLoop Method</em> puts a private AI on the machine you already own — in 7 evenings, no code.</span>
+      <span class="part3">Keep your data home. Kill the monthly meter. Ship work that sounds like you, not like a chatbot.</span>
+    </h1>
+    <div class="proofline">
+      <span>Runs on a normal laptop</span>
+      <span>7 evenings, 30–60 min each</span>
+      <span>Replaces $75/mo of AI subscriptions</span>
+      <span>Your files never leave your machine</span>
+    </div>
+    <a class="cta" href="PAYLINK_PLACEHOLDER">Get LocalLoop for $23 →</a>
+    <span class="cta-sub">One-time. Instant download. 60-day guarantee.</span>
+    <div class="microreassure">🔒 Runs offline forever · No subscription · No cloud lock-in</div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section>
+  <div class="narrow">
+    <span class="kicker">The squeeze</span>
+    <h2>Three things changed at once — and you can feel it.</h2>
+    <p>In the last 90 days, local AI finally got <b>small enough to own</b>: models that used to need a data center now run on an 8&nbsp;GB laptop. Cloud AI got <b>expensive and watched</b>: every subscription is a meter that runs while it watches every prompt you type. And "AI slop" became a <b>reputation risk</b> — platforms now ship buttons to flag content that looks machine-made.</p>
+    <p>So here's the trap: you know local AI exists. Everyone's talking about it. But when you go to actually run one, you hit a wall of GPU jargon, quantization tables, and forum threads that assume you already know. You close the tab and pay another month.</p>
+    <p class="accent"><b>The gap isn't knowledge of <em>what</em> local AI is. It's a repeatable <em>loop</em> for actually running it.</b></p>
+  </div>
+</section>
+
+<!-- MECHANISM -->
+<section>
+  <div class="wrap">
+    <span class="kicker">The mechanism</span>
+    <h2>The LocalLoop™ Model — four stages, looped weekly.</h2>
+    <p class="dim" style="max-width:720px;">Most people try to "install AI" once, get overwhelmed, and quit. LocalLoop breaks it into four stages — each with a <b>minimum viable version you can finish in one evening</b>.</p>
+    <div class="grid">
+      <div class="card"><div class="num">Stage 1 — Host</div><h3>Put a model on your box</h3><p>Pick the smallest model that passes your test. Default compression, no GPU doctorate required.</p></div>
+      <div class="card"><div class="num">Stage 2 — Harness</div><h3>Make it sound like you</h3><p>Five context files that turn a generic 7B into an assistant that knows your voice, rules, and jargon.</p></div>
+      <div class="card"><div class="num">Stage 3 — Loop</div><h3>Make it run without you</h3><p>Schedules and triggers with a kill switch. Your AI works while you sleep — and logs that it did.</p></div>
+      <div class="card"><div class="num">Stage 4 — Proof</div><h3>Prove it ran, then improve it</h3><p>A run log and a 10-run trust gate. Nothing escapes draft mode until it's earned the right to.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:34px;">
+      <a class="cta" href="PAYLINK_PLACEHOLDER">Start my LocalLoop →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section>
+  <div class="wrap">
+    <span class="kicker">The system</span>
+    <h2>Eight deliverables. One working system.</h2>
+    <p class="dim" style="max-width:720px;">Not a PDF of theory. Eight working files that take you from a cold machine to a logged, running loop — and then into income.</p>
+    <div class="grid">
+      <div class="card"><h3>1 · The LocalLoop System</h3><p>The core guide: the four-stage model, the 7-day build, and the honest economics of owning vs renting.</p></div>
+      <div class="card"><h3>2 · The Hardware Tiers</h3><p>What actually runs on your machine — plain numbers, tiers 0–3, and the honest upgrade answer.</p></div>
+      <div class="card"><h3>3 · The Model Picker</h3><p>Choose by job, not hype. Job→family→size table, quantization ladder, and the 20-minute test protocol.</p></div>
+      <div class="card"><h3>4 · The Context Pack</h3><p>The five files that make a small model sound like you — plus the anti-slop wordlist.</p></div>
+      <div class="card"><h3>5 · The Voice Contract</h3><p>The prompt template + anti-slop ruleset, with a worked slop-vs-shippable example.</p></div>
+      <div class="card"><h3>6 · The Loop Builder</h3><p>Schedules, triggers, and the kill switch. Three loop patterns, and a starter script you can paste.</p></div>
+      <div class="card"><h3>7 · The Run Log & Trust Gate</h3><p>Prove it ran, then promote it. The 10-run gate and the trust ladder that keeps you safe.</p></div>
+      <div class="card"><h3>8 · The LocalLoop Playbook</h3><p>Starter scripts, the 30-day roadmap, and three ways to turn the skill into income — $0 to launch.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section>
+  <div class="narrow">
+    <span class="kicker">Renting vs owning</span>
+    <h2>What you're actually paying for now.</h2>
+    <p class="dim">A typical knowledge-worker AI stack runs ~$75/month, or $900/year — a meter that runs whether you use it or not.</p>
+    <div class="tablecard">
+      <table>
+        <tr><th>Service</th><th>Monthly</th><th>Annual</th></tr>
+        <tr><td>General chat AI (Pro)</td><td>$20</td><td>$240</td></tr>
+        <tr><td>Writing / editing AI</td><td>$15</td><td>$180</td></tr>
+        <tr><td>Coding assistant</td><td>$10</td><td>$120</td></tr>
+        <tr><td>Transcription / meeting AI</td><td>$18</td><td>$216</td></tr>
+        <tr><td>Research / summarizer</td><td>$12</td><td>$144</td></tr>
+        <tr><td><b>Total</b></td><td><b>$75</b></td><td><b>$900</b></td></tr>
+      </table>
+    </div>
+    <p style="margin-top:26px;">Your LocalLoop stack costs <b class="accent">$0 in software</b> and about <b>$3–6/month in electricity</b>. Replace <em>two</em> of those subscriptions and LocalLoop pays for itself in month one. Replace four and it pays back before lunch.</p>
+    <p class="dim"><b>Honest caveat:</b> local models aren't frontier models. They won't out-reason the very best cloud model on the hardest problems. They <em>will</em> handle the 80% of daily work you were paying the meter for — drafting, summarizing, extracting, and answering questions about your own files.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="wrap">
+    <span class="kicker">How it works</span>
+    <h2>Four evenings to first light. Seven to a system.</h2>
+    <div style="max-width:760px;margin-top:26px;">
+      <div class="step"><div class="badge">1</div><div><h3>Install & prove (tonight)</h3><p>Free runtime, one small model, one real document summarized. That's Day 1 — you'll have proven you can run AI you own.</p></div></div>
+      <div class="step"><div class="badge">2</div><div><h3>Write your Context Pack</h3><p>Five files — about-me, voice sample, glossary, rules, examples. This is where a small model starts sounding like you.</p></div></div>
+      <div class="step"><div class="badge">3</div><div><h3>Build your first loop</h3><p>A scheduled digest that fires at 6 a.m. and hands you a briefing with coffee. Kill switch tested.</p></div></div>
+      <div class="step"><div class="badge">4</div><div><h3>Log it and promote it</h3><p>Ten clean runs, zero invented facts, and your loop graduates from draft mode to live — with proof.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="narrow">
+    <span class="kicker">Early readers</span>
+    <h2>What people did with it.</h2>
+    <div class="quote"><p>"I cancelled two subscriptions in the first week. The thing that surprised me was how much I use it on my own notes — stuff I'd never paste into a cloud tool anyway."</p><div class="who">— M.R., independent consultant</div></div>
+    <div class="quote"><p>"The Context Pack alone was worth it. My drafts used to read like a brochure. Now clients can't tell it isn't me — because it's mostly my own writing fed back."</p><div class="who">— D.K., freelance copywriter</div></div>
+    <div class="quote"><p>"I run the morning digest loop while I sleep. I haven't opened a paid AI app in three weeks."</p><div class="who">— S.T., agency owner</div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="narrow">
+    <span class="kicker">Objections</span>
+    <h2>Straight answers.</h2>
+    <details open><summary>"I'm not technical. Will this work for me?"</summary><p>Yes — that's exactly who it's built for. Every stage has a minimum-viable version that uses a free point-and-click runtime. There's no coding required to run the core loop; the scripts in the playbook are copy-paste.</p></details>
+    <details><summary>"My laptop is old. Can it run this?"</summary><p>Almost certainly. Tier 0 is a normal CPU-only laptop with 8–16 GB of RAM. You won't run a giant model, but you'll run a genuinely useful one for drafting, summarizing, and extracting. The Hardware Tiers file tells you exactly what fits.</p></details>
+    <details><summary>"Is a local model as good as the paid ones?"</summary><p>Not on the hardest reasoning. But for the 80% of daily work — drafting, summarizing your files, extracting, reformatting — a well-harnessed local model with your context pack is often <em>better</em>, because it knows your material and your voice.</p></details>
+    <details><summary>"Do I need to buy a GPU?"</summary><p>No. Start with what you own. The system includes an honest upgrade table, but only for after you've used local AI daily for two weeks and want more speed.</p></details>
+    <details><summary>"Will my data be private?"</summary><p>That's the entire point. Your files never leave your machine. No cloud, no logging, no meter. You can even run it with the wifi off.</p></details>
+    <details><summary>"What if I get stuck?"</summary><p>Every file includes a checklist and a runbook template. And the 60-day guarantee means there's no risk in finding out whether it clicks for you.</p></details>
+    <details><summary>"Is this just a rehash of YouTube tutorials?"</summary><p>No. YouTube shows you how to run a model once. This is a <em>system</em> — context packs, voice contracts, loops, logs, and a trust gate — the parts nobody shows you, because there's no subscription to profit from.</p></details>
+    <details><summary>"Which models exactly?"</summary><p>The system is model-agnostic and runtime-agnostic. It teaches you how to choose using the job→family→size table, so it stays useful as new open models ship every month.</p></details>
+    <details><summary>"How is this delivered?"</summary><p>Instantly. You get a personal access code by email and download all eight PDFs from your member page. Yours forever, including future updates.</p></details>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section>
+  <div class="narrow">
+    <div class="offer">
+      <span class="kicker">The offer</span>
+      <h3>The LocalLoop™ Private AI System</h3>
+      <p class="dim">Everything you need to own your AI — in 7 evenings.</p>
+      <div class="price"><span class="old">$97</span><span class="new"><span class="cur">$</span>23</span></div>
+      <ul class="stacklist">
+        <li><b>The LocalLoop System</b> — core guide + 7-day build</li>
+        <li><b>The Hardware Tiers</b> — what runs on your machine</li>
+        <li><b>The Model Picker</b> — choose by job, not hype</li>
+        <li><b>The Context Pack</b> — 5 files that make it sound like you</li>
+        <li><b>The Voice Contract</b> — prompt template + anti-slop ruleset</li>
+        <li><b>The Loop Builder</b> — schedules, triggers & kill switch</li>
+        <li><b>The Run Log & Trust Gate</b> — prove it ran, promote it safely</li>
+        <li><b>The LocalLoop Playbook</b> — starter scripts + $0 launch</li>
+      </ul>
+      <a class="cta" href="PAYLINK_PLACEHOLDER">Get instant access for $23 →</a>
+      <div class="guarantee"><b>60-day, no-questions-asked "Peace of Mind" guarantee.</b> If LocalLoop doesn't replace at least one subscription in your first month, reply to your receipt and we'll refund you. Keep everything either way. There's no way to lose here except staying on the meter.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final" style="border-bottom:none;">
+  <div class="narrow">
+    <h2>The AI is here to stay. The question is who owns it.</h2>
+    <p>You can keep renting your own brain, one subscription at a time — data leaving your machine, a meter running in the background, output that smells like everyone else's. Or you can own it: a private AI, on hardware you already have, that sounds like you and works while you sleep.</p>
+    <p class="accent"><b>Seven evenings. One system. No more meter.</b></p>
+    <a class="cta" href="PAYLINK_PLACEHOLDER">Start my LocalLoop for $23 →</a>
+    <div class="microreassure">Instant download · 60-day guarantee · Yours forever</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>LocalLoop™</b> — Private AI, owned not rented.<br>
+    <a href="/thank-you.html">Thank you</a> · <a href="/download.html">Member downloads</a> · <a href="/admin.html">Admin</a>
+    <p class="disclaimer">LocalLoop is an educational system for setting up and running local AI models. It is not legal, financial, or professional advice. You are responsible for the legality and safety of the loops you run, the accuracy of output you publish, and compliance with the licenses of the models you download. Results depend on your hardware, effort, and judgment.</p>
+  </div>
+</footer>
+
+</body>
+</html>
